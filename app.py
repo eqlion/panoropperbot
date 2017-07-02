@@ -14,7 +14,7 @@ from io import BytesIO
 import logging
 
 # Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
@@ -35,7 +35,7 @@ def crop(bot, update):
     return PHOTO
 
 def photo(bot, update):
-    photo_file = bot.get_file(update.message.photo[-1].file_id)
+    photo_file = bot.get_file(update.message.photo[-1].file_id) if update.message.photo else bot.get_file(update.message.document.file_id)
     photo_file.download('pano.jpg')
 
     update.message.reply_text('What a great photo!')
